@@ -29,3 +29,18 @@
     - "rxvt_unicode"
     - "rxvt_unicode_conf"
   with_items: "{{ rxvt_unicode_users }}"
+
+# Set up xinitrc
+- name: set up xinitrc
+  lineinfile: >
+    dest="~{{ item }}/.xinitrc"
+    state=present
+    create=yes
+    insertbefore=BOF
+    regexp=".*Xresources.* "
+    line="[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources"
+  become: no
+  with_items: "{{ rxvt_unicode_users }}"
+  tags:
+    - "rxvt_unicode"
+    - "rxvt_unicode_conf"
