@@ -6,4 +6,4 @@ testinfra_hosts = \
 
 
 def test_command(Command):
-    assert Command('rxvt-unicode --version').rc == 0
+    assert Command('urxvt -h').rc == 1
