@@ -1,0 +1,12 @@
+---
+# User variables for role
+rxvt_unicode_packages: rxvt-unicode
+
+rxvt_unicode_packages_state: present
+
+rxvt_unicode_conf_template: Xresources.j2
+
+rxvt_unicode_conf_path: .Xresources
+
+rxvt_unicode_users:
+  - "{{ ansible_ssh_user }}"
