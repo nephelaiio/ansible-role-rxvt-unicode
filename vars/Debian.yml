@@ -1,2 +1,5 @@
 ---
 # Variable definitions and overrides for Debian
+rxvt_unicode_packages:
+  - rxvt-unicode
+  - x11-xserver-utils

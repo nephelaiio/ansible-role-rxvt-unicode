@@ -1,2 +1,5 @@
 ---
 # Variable overrides and definitions for RedHat variants
+rxvt_unicode_packages:
+  - rxvt-unicode
+  - xorg-x11-server-utils

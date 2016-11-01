@@ -37,8 +37,8 @@
     state=present
     create=yes
     insertbefore=BOF
-    regexp=".*Xresources.* "
-    line="[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources"
+    regexp=".*{{ rxvt_unicode_conf_path }}.* "
+    line="xrdb -merge -I$HOME {{ rxvt_unicode_conf_path }}"
   become: no
   with_items: "{{ rxvt_unicode_users }}"
   tags:
