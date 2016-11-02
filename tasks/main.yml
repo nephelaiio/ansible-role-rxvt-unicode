@@ -37,7 +37,7 @@
     state=present
     create=yes
     insertbefore=BOF
-    regexp=".*{{ rxvt_unicode_conf_path }}.* "
+    regexp="xrdb .*{{ rxvt_unicode_conf_path }}.*"
     line="xrdb -merge -I$HOME {{ rxvt_unicode_conf_path }}"
   become: no
   with_items: "{{ rxvt_unicode_users }}"
