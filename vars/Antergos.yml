@@ -1,5 +1,0 @@
----
-# Variable overrides and definitions for Arntergos
-rxvt_unicode_packages:
-  - rxvt-unicode
-  - xorg-xrdb
