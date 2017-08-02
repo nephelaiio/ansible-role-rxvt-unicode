@@ -12,36 +12,32 @@
 
 # Install packages
 - name: install rxvt_unicode packages
-  package: >
-    name="{{ rxvt_unicode_packages }}"
-    state="{{ rxvt_unicode_packages_state }}"
+  package:
+    name: "{{ rxvt_unicode_packages }}"
+    state: "{{ rxvt_unicode_packages_state }}"
   become: yes
   tags:
     - rxvt_unicode
 
 # Set up configuration file
 - name: configure rxvt_unicode
-  template: >
-    src="{{ rxvt_unicode_conf_template }}"
-    dest="~{{ item }}/{{ rxvt_unicode_conf_path }}"
-  become: no
+  template:
+    src: "{{ rxvt_unicode_conf_template }}"
+    dest: "~/{{ rxvt_unicode_conf_path }}"
   when: rxvt_unicode_conf_path is defined
   tags:
     - "rxvt_unicode"
     - "rxvt_unicode_conf"
-  with_items: "{{ rxvt_unicode_users }}"
 
 # Set up xinitrc
 - name: set up xinitrc
-  lineinfile: >
-    dest="~{{ item }}/.xinitrc"
-    state=present
-    create=yes
-    insertbefore=BOF
-    regexp="xrdb .*{{ rxvt_unicode_conf_path }}.*"
-    line="xrdb -merge -I$HOME ~/{{ rxvt_unicode_conf_path }}"
-  become: no
-  with_items: "{{ rxvt_unicode_users }}"
+  lineinfile:
+    dest: "~{{ item }}/.xinitrc"
+    state: present
+    create: yes
+    insertbefore: BOF
+    regexp: "xrdb .*{{ rxvt_unicode_conf_path }}.*"
+    line: "xrdb -merge -I$HOME ~/{{ rxvt_unicode_conf_path }}"
   tags:
     - "rxvt_unicode"
     - "rxvt_unicode_conf"
