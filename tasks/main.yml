@@ -1,5 +1,5 @@
 ---
-- name: "include variable overrides"
+- name: include variable overrides
   include_vars: "{{ item }}"
   with_first_found:
     - "vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
@@ -8,7 +8,7 @@
   tags:
     - rxvt_unicode
 
-- name: install rxvt_unicode packages
+- name: install packages
   package:
     name: "{{ item }}"
     state: "{{ rxvt_unicode_packages_state }}"
@@ -17,7 +17,7 @@
   tags:
     - rxvt_unicode
 
-- name: configure rxvt_unicode
+- name: configure
   template:
     src: "{{ rxvt_unicode_conf_template }}"
     dest: "~/{{ rxvt_unicode_conf_path }}"
