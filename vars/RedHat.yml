@@ -1,6 +1,5 @@
-# vim: ts=2 sw=2 et :
 ---
-# Variable overrides and definitions for RedHat variants
 rxvt_unicode_packages:
+  - epel-release
   - rxvt-unicode
   - xorg-x11-server-utils

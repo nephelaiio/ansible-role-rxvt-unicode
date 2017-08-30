@@ -1,6 +1,4 @@
-# vim: ts=2 sw=2 et :
 ---
-# Include variable definitions
 - name: "include variable overrides"
   include_vars: "{{ item }}"
   with_first_found:
@@ -10,34 +8,30 @@
   tags:
     - rxvt_unicode
 
-# Install packages
 - name: install rxvt_unicode packages
   package:
-    name: "{{ rxvt_unicode_packages }}"
+    name: "{{ item }}"
     state: "{{ rxvt_unicode_packages_state }}"
   become: yes
+  with_items: "{{ rxvt_unicode_packages }}"
   tags:
     - rxvt_unicode
 
-# Set up configuration file
 - name: configure rxvt_unicode
   template:
     src: "{{ rxvt_unicode_conf_template }}"
     dest: "~/{{ rxvt_unicode_conf_path }}"
   when: rxvt_unicode_conf_path is defined
   tags:
-    - "rxvt_unicode"
-    - "rxvt_unicode_conf"
+    - rxvt_unicode
 
-# Set up xinitrc
 - name: set up xinitrc
   lineinfile:
-    dest: "~/.xinitrc"
+    dest: ~/.xinitrc
     state: present
     create: yes
     insertbefore: BOF
     regexp: "xrdb .*{{ rxvt_unicode_conf_path }}.*"
     line: "xrdb -merge -I$HOME ~/{{ rxvt_unicode_conf_path }}"
   tags:
-    - "rxvt_unicode"
-    - "rxvt_unicode_conf"
+    - rxvt_unicode

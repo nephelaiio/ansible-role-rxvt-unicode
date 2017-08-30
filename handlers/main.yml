@@ -1,7 +1,0 @@
----
-# handlers file for rxvt-unicode
-- name: restart rxvt-unicode services
-  service:
-    name=rxvt-unicode_service_name
-    state=restarted
-  become: yes
