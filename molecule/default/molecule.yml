@@ -12,7 +12,7 @@ platforms:
     image: debian:stretch
   - name: xenial
     image: ubuntu:xenial
-  - name: xenial
+  - name: bionic
     image: ubuntu:bionic
   - name: arch
     image: archlinux/base:latest
