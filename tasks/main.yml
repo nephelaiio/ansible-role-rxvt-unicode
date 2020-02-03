@@ -23,7 +23,6 @@
   template:
     src: "{{ rxvt_unicode_conf_template }}"
     dest: "~/{{ rxvt_unicode_conf_path }}"
-  when: rxvt_unicode_conf_path is defined
   tags:
     - configure
 
