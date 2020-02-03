@@ -14,6 +14,33 @@ popd () {
     command popd "$@" > /dev/null
 }
 
+# usage helper
+function help {
+    echo "$0 OPTIONS [ANSIBLE ARGUMENTS]"
+    echo
+    echo "OPTIONS:"
+    echo "   [--local]"
+}
+
+# parse options
+# see https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+
+    case $key in
+        --local)
+            LOCAL=$OK
+            shift # past argument
+            ;;
+        *)    # unknown option
+            POSITIONAL+=("$1") # save it in an array for later
+            shift # past argument
+            ;;
+    esac
+done
+
 # verify requirements
 requirements=(ansible-playbook git)
 for r in ${requirements[@]}; do
@@ -24,14 +51,20 @@ for r in ${requirements[@]}; do
 done
 
 # create temp dir
-tmpdir="$(mktemp -d -t rxvt-unicode-XXXXXXXXXX)"
+tmpdir="$(mktemp -d)"
 
-# install role locally
-pushd $tmpdir
-git clone -q $git_clone_url
-pushd $(basename $git_clone_url .git)/install
-ansible-playbook --connection=local -i inventory playbook.yml
-popd
+# perform local role install
+if [ -z "${LOCAL}" ]; then
+    git clone -q $git_clone_url $tmpdir
+else
+    cp -a . $tmpdir
+fi
+pushd $tmpdir/install
+if [ -f ../requirements.yml ]; then
+    ansible-galaxy install -r ../requirements.yml --force
+fi
+ansible-playbook --become --connection=local -i inventory playbook.yml -t install
+ansible-playbook --connection=local -i inventory playbook.yml ${POSITIONAL[@]}
 popd
 
 # purge temp files
