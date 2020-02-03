@@ -5,4 +5,6 @@ rxvt_unicode_packages_state: present
 
 rxvt_unicode_conf_template: Xresources.j2
 
-rxvt_unicode_conf_path: .Xresources
+rxvt_unicode_xresources_path: .Xresources
+
+rxvt_unicode_conf_path: .Xresources.rxvt

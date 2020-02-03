@@ -10,7 +10,7 @@
   tags:
     - always
 
-- name: install packages
+- name: install urxvt packages
   package:
     name: "{{ item }}"
     state: "{{ rxvt_unicode_packages_state }}"
@@ -19,7 +19,7 @@
   tags:
     - install
 
-- name: configure
+- name: configure urxvt
   template:
     src: "{{ rxvt_unicode_conf_template }}"
     dest: "~/{{ rxvt_unicode_conf_path }}"
@@ -27,13 +27,21 @@
   tags:
     - configure
 
+- name: configure xresources
+  lineinfile:
+    dest: "~/{{ rxvt_unicode_xresources_path }}"
+    state: present
+    create: yes
+    insertbefore: "^#include"
+    line: '#include "{{ rxvt_unicode_conf_path }}"'
+
 - name: set up xinitrc
   lineinfile:
     dest: ~/.xinitrc
     state: present
     create: yes
     insertbefore: BOF
-    regexp: "xrdb .*{{ rxvt_unicode_conf_path }}.*"
-    line: "xrdb -merge -I$HOME ~/{{ rxvt_unicode_conf_path }}"
+    regexp: "xrdb .*{{ rxvt_unicode_xresources_path }}.*"
+    line: "xrdb -merge -I$HOME ~/{{ rxvt_unicode_xresources_path }}"
   tags:
     - configure
