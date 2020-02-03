@@ -4,6 +4,16 @@ git_clone_url=https://github.com/nephelaiio/ansible-role-rxvt-unicode.git
 OK=0
 KO=1
 
+# redefine pushd/popd
+# see: https://stackoverflow.com/questions/25288194/dont-display-pushd-popd-stack-across-several-bash-scripts-quiet-pushd-popd
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
 # verify requirements
 requirements=(ansible-playbook git)
 for r in ${requirements[@]}; do
@@ -18,9 +28,9 @@ tmpdir="$(mktemp -d -t rxvt-unicode-XXXXXXXXXX)"
 
 # install role locally
 pushd $tmpdir
-git clone $git_clone_url
-pushd $(basename $git_clone_url .git)
-ansible-playbook --connection=local --inventory inventory install/playbook.yml
+git clone -q $git_clone_url
+pushd $(basename $git_clone_url .git)/install
+ansible-playbook --connection=local -i inventory playbook.yml
 popd
 popd
 
