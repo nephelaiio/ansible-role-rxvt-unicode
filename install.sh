@@ -5,8 +5,8 @@ OK=0
 KO=1
 
 # verify requirements
-requirements=@(ansible-playbook git)
-for r in $requirements; do
+requirements=(ansible-playbook git)
+for r in ${requirements[@]}; do
     if ! r_path=$(type -p $r); then
         echo "$r executable not found in path, aborting"
         exit $KO
@@ -20,7 +20,7 @@ tmpdir="$(mktemp -d -t rxvt-unicode-XXXXXXXXXX)"
 pushd $tmpdir
 git clone $git_clone_url
 pushd $(basename $git_clone_url .git)
-ansible-playbook install/playbook.yml
+ansible-playbook --connection=local --inventory inventory install/playbook.yml
 popd
 popd
 
