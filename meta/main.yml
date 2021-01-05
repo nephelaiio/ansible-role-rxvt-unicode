@@ -1,6 +1,7 @@
 # vim: ts=2 sw=2 et :
 ---
 galaxy_info:
+  role_name: rxvt-unicode
   author: Ted Cook
   description: An Ansible role to install and configure rxvt-unicode
   license: MIT
@@ -9,15 +10,14 @@ galaxy_info:
     - name: EL
       versions:
         - 7
-    - name: Archlinux
-      versions:
-        - all
     - name: Ubuntu
       versions:
+        - focal
+        - bionic
         - xenial
     - name: Debian
       versions:
-        - stretch
+        - buster
   galaxy_tags:
     - rxvt
     - unicode
