@@ -8,4 +8,4 @@
       when: (ansible_os_family | lower) == 'debian'
       changed_when: false
   roles:
-    - role: nephelaiio.rxvt-unicode
+    - role: nephelaiio.rxvt_unicode

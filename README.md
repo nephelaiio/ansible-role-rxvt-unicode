@@ -1,4 +1,4 @@
-# nephelaiio.rxvt-unicode
+# nephelaiio.rxvt_unicode
 
 [![Build Status](https://github.com/nephelaiio/ansible-role-rxvt-unicode/workflows/CI/badge.svg)](https://github.com/nephelaiio/ansible-role-rxvt-unicode/actions)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nephelaiio.rxvt-unicode-blue.svg)](https://galaxy.ansible.com/nephelaiio/rxvt-unicode/)
