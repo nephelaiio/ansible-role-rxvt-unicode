@@ -1,7 +1,7 @@
 # vim: ts=2 sw=2 et :
 ---
 galaxy_info:
-  role_name: rxvt-unicode
+  role_name: rxvt_unicode
   author: Ted Cook
   description: An Ansible role to install and configure rxvt-unicode
   license: MIT
@@ -22,4 +22,5 @@ galaxy_info:
     - rxvt
     - unicode
 
-dependencies: []
+dependencies:
+  - role: nephelaiio.plugins
